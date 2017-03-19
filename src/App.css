@@ -1,0 +1,105 @@
+.App {
+  width:912px;
+  margin:0 auto;
+  height:auto;
+  overflow: hidden;
+  background-color: lightgray;
+}
+
+h2{
+  font-family: Arial,sans-serif;
+  padding:15px;
+}
+
+button{
+  font-size:16px;
+  font-weight: 500;
+  height:40px;
+  font-family: Arial,sans-serif;
+  border:1px solid transparent;
+  border-radius: 0;
+}
+.add-box{
+  background-color: white;
+  height:72px;
+}
+input{
+  height:40px;
+  margin-top:16px;
+  /*margin-bottom:16px;*/
+  border:1px solid lightgray;
+  border-radius: 0;
+  padding:0;
+  /*width:80%;*/
+  /*margin-left:16px;*/
+}
+
+.add-box button{
+  margin-top:16px;
+  background-color: lightgray;
+  color:black;
+  /*margin-left:16px;*/
+}
+/***************************************************/
+.header{
+  height:48px;
+  background-color: white;
+}
+.header p{
+  color:#757575;
+  font-size:14px;
+  line-height:48px;
+  vertical-align: center;
+  font-weight: 500;
+  /*margin-left:16px;*/
+}
+/***************************************************/
+
+.lists{
+  height:72px;
+  background-color: white;
+  margin-top:3px;
+}
+
+/*.lists input{*/
+  /*!*margin-left:16px;*!*/
+/*}*/
+.lists .span-box{
+  margin-top:24px;
+  /*margin-left:16px;*/
+}
+.lists span{
+  height:24px;
+  width:24px;
+  fill:#909090;
+}
+.lists p{
+  color:#505050;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight:400;
+  margin-top:24px;
+  margin-bottom: 24px;
+}
+/*.lists p:nth-child(1){*/
+  /*margin-left:24px;*/
+/*}*/
+.lists .save{
+  margin-top:16px;
+  background-color: lightgray;
+  color:#07f;
+  width:40%;
+}
+.lists .cancel{
+  margin-top:16px;
+  background-color: #07f;
+  color:#ffffff;
+  width:40%;
+  margin-left:10px;
+}
+
+
+
+
+
+/***************************************************/

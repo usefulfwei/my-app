@@ -1,0 +1,263 @@
+import React, { Component } from 'react';
+// import * as data from '../data.json';
+import './App.css';
+
+const data = [
+  {
+    "id":1,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":2,
+    "name":"John Doe",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":3,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":4,
+    "name":"hehe",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":5,
+    "name":"Messi",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":7,
+    "name":"CR",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":8,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":9,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":10,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":11,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":12,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":13,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":14,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":15,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":16,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":17,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":18,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":19,
+    "name":"lichang zhang",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  },
+  {
+    "id":20,
+    "name":"Cristiano",
+    "email":"zhanglichang2016@gmail.com",
+    "phone":1234567890
+  }
+];
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = ({
+      lists : data,
+      length : data.length
+    })
+  }
+  addNew(){
+    let name = this.refs.name.value.trim();
+    let phone = this.refs.phone.value.trim();
+    let email = this.refs.email.value.trim();
+    let lists = this.state.lists;
+    let length = this.state.length;
+    if(!name || !phone || !email){
+      alert('fill all the blank');
+      return;
+    }
+    let newUser;
+    // let wrongId = parseInt(new Date().getSeconds()+Math.random()*10);
+    newUser = {
+      id: length+2,
+      name: name,
+      email: email,
+      phone: phone,
+      editState: false
+    };
+    lists.push(newUser);
+    this.setState({lists:lists,length:lists.length})
+    this.refs.name.value = '';
+    this.refs.phone.value = '';
+    this.refs.email.value = '';
+  }
+  editItem(id){
+    let lists = this.state.lists;
+    for(let i=0;i<lists.length;i++){
+      if(lists[i].id === id){
+        let { editState = false } = lists[i];
+        lists[i].editState = !editState;/*取反*/
+        return this.setState({lists});
+      }
+    }
+    this.setState({lists})
+  }
+  saveItem(data){
+    let lists = this.state.lists;
+    for(let i=0;i<lists.length;i++){
+      if(lists[i].id === data.id){
+        let { editState } = lists[i];
+        lists[i].editState = !editState;/*取反*/
+        lists[i] = data;
+        return this.setState({lists});
+      }
+    }
+    this.setState({lists})
+  }
+  delItem(id){
+    let lists = this.state.lists;
+    for(let i=0;i<lists.length;i++){
+      if(lists[i].id === id){
+        lists.splice(i,1);
+        break;
+      }
+    }
+    this.setState({lists:lists,length:lists.length})
+  }
+  render() {
+    return (
+      <div className="App">
+        <h2>List of participants</h2>
+        <div className=" row add-box">
+            <div className="col-md-3"><input  type="text" ref="name" placeholder="Full name"/></div>
+            <div className="col-md-4"><input  type="email" ref="email" placeholder="E-mail address"/></div>
+            <div className="col-md-3"><input type="phone" ref="phone" placeholder="Phone number"/></div>
+            <button className="btn col-md-2" onClick={this.addNew.bind(this)}>Add new</button>
+        </div>
+        <div className=" row header">
+          <div className="col-md-3"><p>Name</p></div>
+          <div className="col-md-4"><p>E-mail address</p></div>
+          <div className="col-md-3" ><p>Phone number</p></div>
+        </div>
+        <div className="list-box">
+          {
+            this.state.lists.map((list) => {
+              return <List list={list} key={list.id} editItem={this.editItem.bind(this)}
+                           saveItem={this.saveItem.bind(this)} delItem={this.delItem.bind(this)}/>
+            })
+          }
+        </div>
+      </div>
+    );
+  }
+}
+
+class List extends Component{
+  saveItem(){
+    let name = this.refs.name.value.trim();
+    let phone = this.refs.phone.value.trim();
+    let email = this.refs.email.value.trim();
+    if(!name || !phone || !email){
+      alert('please fill the blank');
+      return;
+    }
+    this.props.saveItem({
+      id: this.props.list.id,
+      name:name,
+      email:email,
+      phone:phone
+    })
+  }
+  render(){
+    let {id,name,phone,email,editState = false} = this.props.list;
+    let showPart = editState ? (
+        <div className="row lists">
+            <div className="col-md-3"><input  type="text" ref="name" placeholder="Full name"/></div>
+            <div className="col-md-3"><input  type="email" ref="email" placeholder="E-mail address"/></div>
+            <div className="col-md-3"><input type="phone" ref="phone" placeholder="Phone number"/></div>
+            <div className="col-md-3">
+              <button className="btn  save" onClick={this.saveItem.bind(this)}>Save</button>
+              <button className="btn  cancel" onClick={()=> this.props.delItem(id)}>Delete</button>
+            </div>
+        </div>
+        ) : (
+            <div className="row lists">
+              <div className="col-md-3"><p>{name}</p></div>
+              <div className="col-md-4"><p>{email}</p></div>
+              <div className="col-md-3"><p>{phone}</p></div>
+              <div className="col-md-1 span-box"><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={ ()=> this.props.editItem(id)}></span></div>
+              <div className="col-md-1 span-box"><span className="glyphicon glyphicon-trash" aria-hidden="true" onClick={ ()=> this.props.delItem(id)}></span></div>
+            </div>
+        );
+    return(
+        <div>
+          {showPart}
+        </div>
+    )
+  }
+}
+
+
+
+export default App;
